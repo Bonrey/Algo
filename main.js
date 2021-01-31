@@ -4,7 +4,6 @@ function checkCashRegister(price, cash, cid) {
   let result = {status: "OPEN", change: []};
   let cidCurrencyValues = [0.01, 0.05, 0.1, 0.25, 1, 5, 10, 20, 100];
 
-
   while (changeSize > 0 && cidPos >= 0) {
     if (changeSize >= cidCurrencyValues[cidPos]) {
       let current_n = Math.trunc(changeSize / cidCurrencyValues[cidPos]);
