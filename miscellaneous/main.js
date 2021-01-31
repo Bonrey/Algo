@@ -1,3 +1,5 @@
+// https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/javascript-algorithms-and-data-structures-projects/cash-register
+
 function checkCashRegister(price, cash, cid) {
   let changeSize = (cash - price).toFixed(4);
   let cidPos = cid.length - 1;
