@@ -55,4 +55,15 @@ class Set {
     
     return newSet;
   }
+  
+  difference(anotherSet) {
+    const newSet = new Set();
+    this.values().forEach(el => {
+      if (!anotherSet.has(el)) {
+        newSet.add(el);
+      }
+    });
+
+    return newSet;
+  }
 }
