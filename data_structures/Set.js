@@ -66,4 +66,14 @@ class Set {
 
     return newSet;
   }
+  
+  isSubsetOf(anotherSet) {
+    for (let val of this.values()) {
+      if (!anotherSet.has(val)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 }
