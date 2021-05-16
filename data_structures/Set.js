@@ -36,4 +36,12 @@ class Set {
   size() {
     return this.length;
   }
+  
+  union(anotherSet) {
+    const newSet = new Set();  
+    this.values().forEach(el => newSet.add(el));
+    anotherSet.values().forEach(el => newSet.add(el));
+
+    return newSet;
+  }
 }
