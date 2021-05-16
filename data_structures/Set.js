@@ -44,4 +44,15 @@ class Set {
 
     return newSet;
   }
+  
+  intersection(anotherSet) {
+    const newSet = new Set();
+    this.values().forEach(el => {
+      if (anotherSet.has(el)) {
+        newSet.add(el);
+      }
+    });
+    
+    return newSet;
+  }
 }
