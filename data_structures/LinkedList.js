@@ -25,6 +25,29 @@ function LinkedList() {
 
     length++;
   };
+  
+  this.addAt = function (index, element) {
+    if (index < 0 || index > length) {
+      return false;
+    }
+
+    length++;
+    let newNode = new Node(element);
+
+    if (index === 0) {
+      newNode.next = head;
+      head = newNode;
+    } else {
+      let currentNode = head;
+
+      while (index-- > 1) {
+        currentNode = currentNode.next;
+      }
+
+      newNode.next = currentNode.next;
+      currentNode.next = newNode;
+    }
+  };
 
   this.remove = function (element) {
     if (head && head.element === element) {
