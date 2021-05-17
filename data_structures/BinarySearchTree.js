@@ -78,6 +78,46 @@ function BinarySearchTree() {
 
     return false;
   };
+
+  this.findMinHeight = function () {
+    if (!this.root) return -1;
+
+    let minHeight = Infinity;
+    function traverse(root, curr = 0) {
+      if (!root) {
+        minHeight = Math.min(maxHeight, curr - 1);
+        return;
+      }
+
+      traverse(root.left, curr + 1);
+      traverse(root.right, curr + 1);
+    }
+
+    traverse(this.root);
+    return minHeight;
+  };
+
+  this.findMaxHeight = function () {
+    if (!this.root) return -1;
+
+    let maxHeight = 0;
+    function traverse(root, curr = 0) {
+      if (!root) {
+        maxHeight = Math.max(maxHeight, curr - 1);
+        return;
+      }
+
+      traverse(root.left, curr + 1);
+      traverse(root.right, curr + 1);
+    }
+
+    traverse(this.root);
+    return maxHeight;
+  };
+
+  this.isBalanced = function () {
+    return this.findMaxHeight() - this.findMinHeight() <= 1;
+  };
 }
 
 
