@@ -118,6 +118,110 @@ function BinarySearchTree() {
   this.isBalanced = function () {
     return this.findMaxHeight() - this.findMinHeight() <= 1;
   };
+
+  this.inorder = function () {
+    if (!this.root) return null;
+
+    let result = [];
+    function traverse(root) {
+      if (!root) return;
+
+      traverse(root.left);
+      result.push(root.value);
+      traverse(root.right);
+    }
+
+    traverse(this.root);
+    return result;
+  };
+
+  this.preorder = function () {
+    if (!this.root) return null;
+
+    let result = [];
+    function traverse(root) {
+      if (!root) return;
+
+      result.push(root.value);
+      traverse(root.left);
+      traverse(root.right);
+    }
+
+    traverse(this.root);
+    return result;
+  };
+
+  this.postorder = function () {
+    if (!this.root) return null;
+
+    let result = [];
+    function traverse(root) {
+      if (!root) return;
+
+      traverse(root.left);
+      traverse(root.right);
+      result.push(root.value);
+    }
+
+    traverse(this.root);
+    return result;
+  };
+
+  this.levelOrder = function () {
+    if (!this.root) return null;
+
+    let result = [];
+    function traverse(root) {
+      const queue = [root];
+
+      while (queue.length) {
+        let node = queue.shift(); 
+        result.push(node.value);
+
+        if (node.left) {
+          queue.push(node.left);
+        }
+        if (node.right) {
+          queue.push(node.right);
+        }
+      }
+    }
+
+    traverse(this.root);
+    return result;
+  };
+
+  this.reverseLevelOrder = function () {
+    if (!this.root) return null;
+
+    let result = [];
+    function traverse(root) {
+      const queue = [root];
+
+      while (queue.length) {
+        let node = queue.shift(); 
+        result.push(node.value);
+
+        if (node.right) {
+          queue.push(node.right);
+        }
+        if (node.left) {
+          queue.push(node.left);
+        }
+      }
+    }
+
+    traverse(this.root);
+    return result;
+  };
+
+  this.remove = function (node) {
+    function find() {
+
+    }
+
+    
+  };
 }
 
 
