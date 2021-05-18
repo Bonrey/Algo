@@ -175,7 +175,7 @@ function BinarySearchTree() {
       const queue = [root];
 
       while (queue.length) {
-        let node = queue.shift(); 
+        let node = queue.shift();
         result.push(node.value);
 
         if (node.left) {
@@ -199,7 +199,7 @@ function BinarySearchTree() {
       const queue = [root];
 
       while (queue.length) {
-        let node = queue.shift(); 
+        let node = queue.shift();
         result.push(node.value);
 
         if (node.right) {
@@ -215,12 +215,82 @@ function BinarySearchTree() {
     return result;
   };
 
-  this.remove = function (node) {
-    function find() {
-
+  this.remove = function (value) {
+    function getType(node) {
+      return !node ? -1 : node.left && node.right ? 2 : node.left || node.right ? 1 : 0;
     }
 
-    
+    const find = value => {
+      let parent = null;
+      let current = this.root;
+
+      while (current && current.value !== value) {
+        parent = current;
+        current = value < current.value ? current.left : current.right;
+      }
+
+      return { current, parent, type: getType(current) };
+    }
+
+    let found = find(value);
+
+
+    switch (found.type) {
+      case 0:
+        if (!found.parent) {
+          this.root = null;
+        } else {
+          if (found.parent.value > found.current.value) {
+            found.parent.left = null;
+          } else {
+            found.parent.right = null;
+          }
+        }
+        break;
+
+      case 1:
+        if (!found.parent) {
+          this.root = found.current.left || found.current.right;
+        } else {
+          if (found.parent.value > found.current.value) {
+            found.parent.left = found.current.left || found.current.right;
+          } else {
+            found.parent.right = found.current.left || found.current.right;
+          }
+        }
+        break;
+
+      case 2:
+        let prevNode = null;
+        let currentNode = found.current.right;
+
+        while (currentNode.left) {
+          [prevNode, currentNode] = [currentNode, currentNode.left];
+        }
+
+        if (!prevNode) {
+          currentNode.left = this.root.left;
+          this.root = currentNode;
+        } else {
+
+          if (getType(currentNode) === 1) {
+            prevNode.left = currentNode.right;
+          } else {
+            prevNode.left = null;
+          }
+
+          currentNode = found.current;
+          if (!found.parent) {
+            this.root = currentNode;
+          } else {
+            found.parent.right = currentNode;
+          }
+        }
+
+        break;
+      default:
+        return null;
+    }
   };
 }
 
@@ -235,3 +305,20 @@ function isBinarySearchTree(root, lower = -Infinity, upper = Infinity) {
 
   return false;
 }
+
+
+
+let bst = new BinarySearchTree();
+bst.add(1);
+bst.add(2);
+bst.add(3);
+bst.add(4);
+bst.add(5);
+bst.add(0);
+
+
+displayTree(bst);
+bst.remove(1);
+
+displayTree(bst);
+
