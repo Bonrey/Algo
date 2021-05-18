@@ -292,6 +292,16 @@ function BinarySearchTree() {
         return null;
     }
   };
+  
+  this.invert = function (node = this.root) {
+    if (!node) return;
+
+    currentNode = node;
+    [currentNode.left, currentNode.right] = [currentNode.right, currentNode.left];
+
+    this.invert(node.left);
+    this.invert(node.right);
+  };
 }
 
 
@@ -305,20 +315,3 @@ function isBinarySearchTree(root, lower = -Infinity, upper = Infinity) {
 
   return false;
 }
-
-
-
-let bst = new BinarySearchTree();
-bst.add(1);
-bst.add(2);
-bst.add(3);
-bst.add(4);
-bst.add(5);
-bst.add(0);
-
-
-displayTree(bst);
-bst.remove(1);
-
-displayTree(bst);
-
