@@ -4,7 +4,6 @@ function partitions(num) {
   function solve(n, curr) {
     if (n === 0) {
       result.push(curr.join('+'));
-      return;
     }
 
     for (let i = 1; i <= n; i++) {
