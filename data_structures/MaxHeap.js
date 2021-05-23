@@ -31,8 +31,12 @@ const MaxHeap = function () {
         j++;
       }
 
-      [heap[i], heap[j]] = [heap[j], heap[i]];
-      i = j;
+      if (heap[i] < heap[j]) {
+        [heap[i], heap[j]] = [heap[j], heap[i]];
+        i = j;
+      } else {
+        break;
+      }
     }
 
     return max;
@@ -49,9 +53,13 @@ const MaxHeap = function () {
 
 
 let heap = new MaxHeap();
-heap.insert(3);
-heap.insert(2);
 heap.insert(9);
-heap.insert(7);
-console.log(heap.remove());
+heap.insert(4);
+heap.insert(3);
+heap.insert(1);
+heap.insert(0);
+heap.insert(2);
+
+console.log(heap.print());
+heap.remove();
 console.log(heap.print());
