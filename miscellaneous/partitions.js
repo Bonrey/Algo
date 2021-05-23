@@ -17,4 +17,4 @@ function partitions(num) {
 }
 
 // Example
-numberOfNames(5).forEach(expr => console.log(expr));
+partitions(5).forEach(expr => console.log(expr));
