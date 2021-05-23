@@ -12,10 +12,11 @@ const MaxHeap = function () {
   }
 
   this.remove = function () {
-    if (!this.size()) return null;
-
     const max = heap[1];
     const last = heap.pop();
+    if (!this.size()) {
+      return max || null;
+    }
 
     let i = 1;
     heap[i] = last;
